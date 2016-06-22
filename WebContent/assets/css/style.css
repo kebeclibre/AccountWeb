@@ -6,3 +6,11 @@
 .menu a {
 	margin-right: 10px;
 }
+
+table, th, td {
+    border: 1px solid black;
+}
+
+tr:hover {
+	background-color: silver;
+}

@@ -46,14 +46,14 @@ public class accountFormAction extends ActionAbstract {
 				return result;
 			}
 		
-			if (null == u.getAccount()) {
-				Account a = new Account();
-				a.setAccountBalance(balance);
-				a.setAccountNumber(numero);
-				a.setAccountCreditLine(allowedCredit);
-				u.setAccount(a);
-				userSession.updateUser(u);
-			}
+//			if (0 == u.getAccounts().size()) {
+//				Account a = new Account();
+//				a.setAccountBalance(balance);
+//				a.setAccountNumber(numero);
+//				a.setAccountCreditLine(allowedCredit);
+//				u.addAccount(a);
+//				userSession.updateUser(u);
+//			}
 			
 			result.setTarget("accountForm");
 			
