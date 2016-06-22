@@ -31,7 +31,7 @@ public class userFormAction extends ActionAbstract {
 		}
 	
 		if (null == username || null == password) {
-			result.setTarget("userForm");
+			result.setTarget("manageUser");
 			result.makeRedirect();
 			
 			return result;

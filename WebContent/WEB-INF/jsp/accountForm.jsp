@@ -11,6 +11,7 @@
    <p>Numéro : <span class="alreadyFilled">${acc.getAccountNumber()}</span> <input type="text" name="numero"/></p>
   <p>Solde Initial : <span class="alreadyFilled">${acc.getAccountBalance()}</span> <input type="text" name="balance"/></p>
   <p>Credit Autorisé : <span class="alreadyFilled">${acc.getAccountCreditLine()}</span> <input type="text" name="allowedCredit"/></p>
+  <input type="hidden" name="aidForm" value="${acc!=null?acc.getAccountId():false}" />
   <p><input type="submit" value="Envoyer"/></p>
   </form>
 

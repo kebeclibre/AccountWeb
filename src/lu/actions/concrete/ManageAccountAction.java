@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import ejb.account.entities.Account;
 import ejb.account.entities.User;
 import ejb.account.session.AccountSessionRemote;
-import ejb.account.session.UserSessionRemote;
 import lu.actions.ActionAbstract;
 import lu.actions.ActionResult;
 
@@ -18,13 +17,17 @@ public class ManageAccountAction extends ActionAbstract {
 	public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
 		User u = (User) req.getSession().getAttribute("user");
 		String aid = req.getParameter("aid");
+		System.out.println(result.isRedirect()+result.getTarget());
 		
-		if (null==req.getSession().getAttribute("user")) {
-			result.setTarget("userForm");
+		if (null==u) {
+			result.setTarget("manageUser");
 			result.makeRedirect();
+			System.out.println("in Null");
 			return result;
-			
+					
 		}
+		
+		System.out.println(result.isRedirect()+result.getTarget());
 				
 		if (null != aid) {
 			Integer acc = Integer.parseInt(aid);
@@ -42,11 +45,15 @@ public class ManageAccountAction extends ActionAbstract {
 			req.setAttribute("acc",a);
 			
 		}
+		
+		
+		
 
 		
-		
+		System.out.println(result.isRedirect()+result.getTarget());
 		
 		result.setTarget("accountForm");
+		System.out.println(result.isRedirect()+result.getTarget());
 		
 		return result;
 	}
