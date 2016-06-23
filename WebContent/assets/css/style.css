@@ -14,3 +14,9 @@ table, th, td {
 tr:hover {
 	background-color: silver;
 }
+
+.borner {
+	margin: 20px;
+	background-color: rgb(204, 153, 255);
+}
+

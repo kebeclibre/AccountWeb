@@ -8,14 +8,13 @@
 </head>
 <body>
 <div class="container">
-<div class="row">
-  <div class="col-md-4"></div>
-   <div class="col-md-4">
+<div class="row borner" id="header">
+   <div class="col-lg-4 col-lg-offset-4">
 
 		<jsp:include page="menu.jsp"></jsp:include>
 
 
 </div>
-    <div class="col-md-4"></div>
+
 </div>
   

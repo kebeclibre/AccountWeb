@@ -14,7 +14,7 @@
 
 
 	<div>
-	<c:if test="${user.prendreAccounts().size() > 0 }">
+	<c:if test="${user.prendreAccounts()!=null && user.prendreAccounts().size() > 0 }">
 	<!--<form action="manageAccount.html" method="POST">-->
 		<!--   <input type="submit" value="Manage" />-->
 		<h1>Available Accounts for user : ${user.getUsername()}</h1>

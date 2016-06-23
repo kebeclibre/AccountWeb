@@ -1,5 +1,7 @@
 package lu.actions.concrete;
 
+import java.util.List;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -8,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import ejb.account.entities.Account;
 import ejb.account.entities.User;
 import ejb.account.session.AccountSessionRemote;
+import ejb.account.session.UserSessionRemote;
 import lu.actions.ActionAbstract;
 import lu.actions.ActionResult;
+import lu.utils.GetLookUp;
 
 public class ManageAccountAction extends ActionAbstract {
 
@@ -17,44 +21,28 @@ public class ManageAccountAction extends ActionAbstract {
 	public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
 		User u = (User) req.getSession().getAttribute("user");
 		String aid = req.getParameter("aid");
-		System.out.println(result.isRedirect()+result.getTarget());
 		
 		if (null==u) {
 			result.setTarget("manageUser");
 			result.makeRedirect();
 			System.out.println("in Null");
-			return result;
-					
+			return result;				
 		}
 		
-		System.out.println(result.isRedirect()+result.getTarget());
 				
 		if (null != aid) {
 			Integer acc = Integer.parseInt(aid);
-			AccountSessionRemote sessionAccount = null; 
-			InitialContext ctx = null;
-			try {
-				ctx = new InitialContext();
-				sessionAccount = (AccountSessionRemote) ctx.lookup("java:app/AccountEJB/AccountSession!ejb.account.session.AccountSessionRemote");
-			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			AccountSessionRemote sessionAccount = (AccountSessionRemote) GetLookUp.getSessionBean("AccountSession");
+			UserSessionRemote sessionUser = (UserSessionRemote) GetLookUp.getSessionBean("UserSession");
+			
 			
 			Account a = sessionAccount.getAccountById(acc);
 			req.setAttribute("acc",a);
-			
+			List<User> listU = sessionUser.getAll();
+			req.setAttribute("listU", listU);	
 		}
-		
-		
-		
 
-		
-		System.out.println(result.isRedirect()+result.getTarget());
-		
 		result.setTarget("accountForm");
-		System.out.println(result.isRedirect()+result.getTarget());
-		
 		return result;
 	}
 

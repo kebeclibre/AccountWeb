@@ -9,12 +9,8 @@ import lu.actions.ActionResult;
 public class ManageUserAction extends ActionAbstract {
 
 	@Override
-	public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {
-	
+	public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {	
 		result.setTarget("userForm");
-		
-		
-		
 		return result;
 	}
 	

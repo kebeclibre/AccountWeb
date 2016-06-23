@@ -21,7 +21,6 @@ public class AccountServ extends HttpServlet {
     }
 
     public void service(HttpServletRequest req, HttpServletResponse resp) {
-    	System.out.println("in AccountServ");
     	Dispatch.delegate(req, resp);
     }
 	

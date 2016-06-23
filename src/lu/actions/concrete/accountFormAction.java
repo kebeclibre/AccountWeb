@@ -1,5 +1,7 @@
 package lu.actions.concrete;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -13,6 +15,7 @@ import ejb.account.session.AccountSessionRemote;
 import ejb.account.session.UserSessionRemote;
 import lu.actions.ActionAbstract;
 import lu.actions.ActionResult;
+import lu.utils.GetLookUp;
 
 
 public class accountFormAction extends ActionAbstract {
@@ -30,50 +33,49 @@ public class accountFormAction extends ActionAbstract {
 		
 		InitialContext ctx = null;
 		
-		AccountSessionRemote sessionAccount = null; 
-		UserSessionRemote userSession = null; 
-		
-		
-		try {
-			ctx = new InitialContext();
-			sessionAccount = (AccountSessionRemote) ctx.lookup("java:app/AccountEJB/AccountSession!ejb.account.session.AccountSessionRemote");
-			userSession = (UserSessionRemote) ctx.lookup("java:app/AccountEJB/UserSession!ejb.account.session.UserSessionRemote");
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		AccountSessionRemote sessionAccount = (AccountSessionRemote) GetLookUp.getSessionBean("AccountSession");
+		UserSessionRemote sessionUser = (UserSessionRemote) GetLookUp.getSessionBean("UserSession"); 
+
+// IF there is no user in HTTP Session, redirect to login page
+		if (null == u) {
+			result.makeRedirect();
+			result.setTarget("userForm");
+			return result;
 		}
-		
-		
-		
-			if (null == u) {
-				result.makeRedirect();
-				result.setTarget("userForm");
-				return result;
-			}
-		
+
+// If there is no account to manage (which Id would be aid): we treat the form to create a new account and add it to the user u
+// If form is empty, we can't treat it, we redirect to the form
 		if (aidForm.equals("false")) {
 			if (null==numero || null==balance || null==allowedCredit){
+				result.setTarget("manageAccount.html");
 				result.makeRedirect();
+				return result;
 			} else {
+				
+				// PREPARATION OF OUR OBJECT
 				Account newAccount = new Account();
 				Userstoaccount assoc = new Userstoaccount();
 				newAccount.setAccountBalance(Double.parseDouble(balance));
 				newAccount.setAccountNumber(numero);
 				newAccount.setAccountCreditLine(Double.parseDouble(allowedCredit));
+				
+				// PERSIST OUR OBJECT
 				assoc.setAccount(newAccount);
 				assoc.setUser(u);
-				u.prendreAccounts().add(newAccount);
-				userSession.persistRelation(assoc);
+				Userstoaccount recup = sessionUser.persistRelation(assoc);
+				
+				
+				// UPDATE VIEW AND RETURN			
+				User newUsr=sessionUser.getUserById(recup.getUser().getUserId());
+				req.getSession().setAttribute("user", newUsr);
 				result.setTarget("userForm");
-				return result;
-				
-				
+		
+				return result;	
 			}
 		}
 		
-			
+// otherwise, it means there is an account to manage, we just display the view
 			result.setTarget("accountForm");
-			
 			return result;
 			
 	}

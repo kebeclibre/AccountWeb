@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletResponse;
 import lu.actions.ActionAbstract;
 import lu.actions.ActionResult;
 
-public class IndexAction extends ActionAbstract {
+public class QuitAction extends ActionAbstract {
 
 	@Override
-	public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {	
+	public ActionResult execute(HttpServletRequest req, HttpServletResponse resp) {		
+		result.makeRedirect();
+		req.getSession().invalidate();
 		result.setTarget("index");
+		
 		return result;
 	}
 
