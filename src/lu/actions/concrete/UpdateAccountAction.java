@@ -1,5 +1,7 @@
 package lu.actions.concrete;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -50,6 +52,12 @@ public class UpdateAccountAction extends ActionAbstract {
 		}
 		
 		accSession.updateAccount(account);
+		
+		List<User> listU = UserSess.getAll();
+		req.setAttribute("listU", listU);
+		
+		Account a = accSession.getAccountById(aid);
+		req.setAttribute("acc",a);
 		
 		req.setAttribute("acc", account);
 		result.setTarget("accountForm");

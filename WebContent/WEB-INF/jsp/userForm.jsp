@@ -7,7 +7,7 @@
   <div class="col-md-4">
   
   	<form action="manageUser.html" method="POST">
-  	<p>Username : <span class="alreadyFilled">${user.getUsername()}</span><input  name="username" /></p>
+  	<p>Username : <span class="alreadyFilled">${user.getUsername()}</span>  <input  name="username" /></p>
   	<p>Password : <input  name="password" type="password" /></p>
   	<p><input  type="submit"  value="Envoyer" /></p>
   	</form>
@@ -15,8 +15,7 @@
 
 	<div>
 	<c:if test="${user.prendreAccounts()!=null && user.prendreAccounts().size() > 0 }">
-	<!--<form action="manageAccount.html" method="POST">-->
-		<!--   <input type="submit" value="Manage" />-->
+
 		<h1>Available Accounts for user : ${user.getUsername()}</h1>
 		<table>
 		<tr><td>Account Number</td><td>Account Balance</td><td>Account Credit Line</td><td>Management</td>
@@ -32,15 +31,15 @@
 		</tr>
 		</c:forEach>
 		</table>
-		<!--</form>-->
-	
-	
-	
-	
+
 	</c:if>
+	<c:if test="${user!=null}" >
+		<div id="deleteOption">
+		<p>Carefull with this 	<a href="deleteUser.html?uid=${user.getUserId()}">Delete current user</a></p>
+		</div>
 	
-	</div>
-  
+  	</c:if>
+  	</div>
   </div>
   <div class="col-md-4">
 

@@ -32,7 +32,8 @@
   <p><input type="submit" value="Envoyer"/></p>
 		<div><p>Account managed by: </p>
 		<c:forEach items="${acc.associatedUsers()}" var="AccUser">
-			<p>${AccUser.getUsername()}</p>	
+			<p>${AccUser.getUsername()}
+			<span class="unsubscribe"><a href="deleteUserFromAccount.html?combined=${acc.getAccountId()}-${AccUser.getUserId()}">Remove user from account</a></span></p>
 		</c:forEach>
 		
 		</div>

@@ -16,7 +16,9 @@ import lu.actions.concrete.ManageUserAction;
 import lu.actions.concrete.QuitAction;
 import lu.actions.concrete.UpdateAccountAction;
 import lu.actions.concrete.accountFormAction;
-import lu.actions.concrete.userFormAction;
+import lu.actions.concrete.DeleteUserAction;
+import lu.actions.concrete.DeleteUserFromAccountAction;
+import lu.actions.concrete.UserFormAction;
 
 
 public class Dispatch {
@@ -28,10 +30,12 @@ public class Dispatch {
 		paths.put("GET/index.html",new IndexAction());
 		paths.put("GET/manageAccount.html",new ManageAccountAction());
 		paths.put("POST/manageAccount.html",new accountFormAction());
-		paths.put("POST/manageUser.html",new userFormAction());
+		paths.put("POST/manageUser.html",new UserFormAction());
 		paths.put("GET/manageUser.html",new ManageUserAction());
 		paths.put("POST/updateAccount.html",new UpdateAccountAction());
 		paths.put("GET/quit.html",new QuitAction());
+		paths.put("GET/deleteUserFromAccount.html", new DeleteUserFromAccountAction());
+		paths.put("GET/deleteUser.html", new DeleteUserAction());
 		
 
 	}

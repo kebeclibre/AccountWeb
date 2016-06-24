@@ -14,7 +14,7 @@ import lu.actions.ActionResult;
 import lu.utils.GetLookUp;
 
 
-public class userFormAction extends ActionAbstract {
+public class UserFormAction extends ActionAbstract {
  
 	
 	@Override
