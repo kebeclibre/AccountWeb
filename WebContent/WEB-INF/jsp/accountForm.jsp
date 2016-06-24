@@ -19,7 +19,7 @@
   <p>Solde Initial : <span class="alreadyFilled">${acc.getAccountBalance()}</span> <input type="text" name="balance"/></p>
   <p>Credit Autorisé : <span class="alreadyFilled">${acc.getAccountCreditLine()}</span> <input type="text" name="allowedCredit"/></p>
   <input type="hidden" name="aidForm" value="${acc!=null?acc.getAccountId():false}" />
-  
+   <p><input type="submit" value="Envoyer"/></p>
   <div>
 	<c:if test="${acc!=null}">
 	<p>Do you want to add a user to this account ?</p>
@@ -29,7 +29,7 @@
 			<option value="${usr.getUserId()}">${usr.getUsername()}</option>				
 		</c:forEach>
 		</select>
-  <p><input type="submit" value="Envoyer"/></p>
+ 
 		<div><p>Account managed by: </p>
 		<c:forEach items="${acc.associatedUsers()}" var="AccUser">
 			<p>${AccUser.getUsername()}

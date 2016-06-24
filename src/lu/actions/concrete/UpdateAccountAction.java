@@ -59,7 +59,6 @@ public class UpdateAccountAction extends ActionAbstract {
 		Account a = accSession.getAccountById(aid);
 		req.setAttribute("acc",a);
 		
-		req.setAttribute("acc", account);
 		result.setTarget("accountForm");
 		return result;
 	}
